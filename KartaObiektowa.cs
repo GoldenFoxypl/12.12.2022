@@ -8,90 +8,98 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Producent
+    class Produkt
     {
         private string nazwa;
-        private string nip;
-
+        private double cena;
+        private string opis;
         public string getNazwa()
         {
-            return nazwa;
-        }
-        public string getNip()
-        {
-            return nip;
-        }
-        public void setNazwa(string nazwa)
-        {
-            this.nazwa = nazwa;
-        }
-    }
-    class Material
-    {
-        private string typ;
-        private int id;
-        private double cena;
-        
-        public void setTyp(string setTyp)
-        {
-            this.typ = setTyp;
-        }
-        public string getTyp()
-        {
-            return this.typ;
+            return this.nazwa;
         }
         public double getCena()
         {
             return this.cena;
         }
-        public void setId(int setId)
+        public string getOpis()
         {
-            this.id = setId;
+            return this.opis;
+        }
+        public void showProdukt()
+        {
+            Console.WriteLine($"To jest {this.nazwa} za {this.cena} jest ono {this.opis}");
         }
     }
-    class Rower
+    class Koszyk
     {
-        private string producent;
-        private string kolor;
-        private Material material;
-        public void jedz()
+        private int id;
+        private Produkt produkt;
+        private Uzytkownik uzytkownik;
+        public int getId()
         {
-
+            return this.id;
         }
-        public void setColor(string kolor)
+        public void operation()
         {
-            kolor = "czarny";
+            Console.WriteLine("Udanych zakupów");
         }
-        public void getColor(string kolor)
+        public Koszyk(int id, Produkt produkt)
         {
-            this.kolor = kolor;
+            this.id = id;
+            this.produkt = produkt;
         }
-        public void setMaterial(Material amaterial)
+        public void setUzytkownik(Uzytkownik uzytkownik)
         {
-            this.material = amaterial;
+            this.uzytkownik = uzytkownik;
         }
-        public Rower(Producent producent, string kolor)
+    }
+    class Uzytkownik
+    {
+        private string login;
+        private string haslo;
+        private Profil profil;
+        public void loguj()
         {
-            this.producent = producent.getNazwa();
-            this.kolor = kolor;
+            Console.WriteLine("Zalogowano");
         }
-        public void showRower()
+        public Uzytkownik(string login, string haslo, Profil profil)
         {
-            Console.WriteLine($"Ten rower zosta³ wyprodukowany przez {this.producent}, rower jest koloru {this.kolor} stworzony z {this.material.getTyp()}");
+            this.login = login;
+            this.haslo = haslo;
+            this.profil = profil;
         }
-
+    }
+    class Profil
+    {
+        private string imie;
+        private string drugieImie;
+        private string nazwisko;
+        public string getImie()
+        {
+            return this.imie;
+        }
+        public string getNazwisko()
+        {
+            return this.nazwisko;
+        }
     }
     internal class Program
     {
         static void Main(string[] args)
         {
-            Material a = new Material();
-            a.setTyp("karbon");
-            Producent a1 = new Producent();
-            a1.setNazwa("TRAXXAS");
-            Rower a2 = new Rower(a1, "czarny");
-            a2.setMaterial(a);
-            a2.showRower();
+            Produkt produkt = new Produkt();
+            produkt.getNazwa();
+            produkt.getCena();
+            produkt.getOpis();
+            produkt.showProdukt();
+            Koszyk koszyk = new Koszyk(1, produkt);
+            koszyk.operation();
+            koszyk.getId();
+            Profil profil = new Profil();
+            Uzytkownik user = new Uzytkownik("alamakota", "Alamakota123", profil);
+            profil.getImie();
+            profil.getNazwisko();
+            user.loguj();
             Console.ReadKey();
         }
     }
